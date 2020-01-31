@@ -2,4 +2,5 @@
 
 export(extract_fields)
 export(get_xml_document)
+export(write_xml_document)
 importFrom(magrittr,"%>%")

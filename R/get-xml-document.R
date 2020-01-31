@@ -9,6 +9,6 @@
 get_xml_document <- function(NCT) {
 
   URL <- paste0("https://clinicaltrials.gov/ct2/show/", NCT, "?displayxml=true")
-  xml2::read_xml(URL)
+  xml_doc <- xml2::read_xml(URL)
 
 }

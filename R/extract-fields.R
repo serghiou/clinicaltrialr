@@ -34,6 +34,7 @@ extract_fields <- function(xml_document) {
     "primary_outcome/measure",
     "primary_outcome/time_frame",
     "primary_outcome/description",
+    "reference/citation",
     "reference/PMID"
   )
 
@@ -58,6 +59,7 @@ extract_fields <- function(xml_document) {
     "primary_outcome_measure",
     "primary_outcome_time_frame",
     "primary_outcome_description",
+    "publications_reference",
     "publications_PMID"
   )
 
