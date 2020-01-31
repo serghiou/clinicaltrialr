@@ -39,7 +39,7 @@
 
     ```r
     library(pbapply)
-    trials_list <- pblapply(paed$`NCT Number`, get_trials, cl = 7)
+    trials_list <- pbapply::pblapply(paed$`NCT Number`, get_trials, cl = 7)
     trials <- do.call(dplyr::bind_rows, trials_list)
     ```
 
