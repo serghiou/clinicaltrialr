@@ -1,6 +1,6 @@
 # clinicaltrialr
 
-<div align="justify"?
+<div align="justify">
 
 ## Overview
 
