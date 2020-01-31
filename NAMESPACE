@@ -3,4 +3,3 @@
 export(extract_fields)
 export(get_xml_document)
 importFrom(magrittr,"%>%")
-useDynLib(clinicaltrialsr)
