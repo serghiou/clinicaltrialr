@@ -15,7 +15,7 @@
     
 3. Import into R.
 
-```{r}
+```r
 library(tidyverse)
 file_names <- list.files("../Data/", pattern = "[0-9].csv", full.names = T)
 paed <- map_df(file_names, read_csv)
@@ -23,7 +23,7 @@ paed <- map_df(file_names, read_csv)
 
 4. Build a function using this package to get all trials of interest.
 
-```{r}
+```r
 library(clinicaltrialr)
 
 get_trials <- function(NCT) {
@@ -37,7 +37,7 @@ get_trials <- function(NCT) {
 
 5. Download all records and construct a dataframe.
 
-```{r}
+```r
 library(pbapply)
 trials_list <- pblapply(paed$`NCT Number`, get_trials, cl = 7)
 trials <- do.call(dplyr::bind_rows, trials_list)
@@ -45,7 +45,7 @@ trials <- do.call(dplyr::bind_rows, trials_list)
 
 6. Re-extract values for which the algorithm was not allowed acccess to the website.
 
-```{r}
+```r
 missing_index <- grep("Error in open", trials_list)
 missing_nct <- paed$`NCT Number`[missing_index]
 missing_doc <- pblapply(missing_nct, get_trials, cl = 7)
@@ -55,7 +55,7 @@ trials <- do.call(dplyr::bind_rows, trials)
 
 7. Save as CSV in a folder called "Output".
 
-```{r}
+```r
 write_csv(trials, "../Output/pediatric-trial-records.csv")
 ```
 
