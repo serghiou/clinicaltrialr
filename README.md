@@ -15,11 +15,11 @@
     
 3. Import into R.
 
-```r
-library(tidyverse)
-file_names <- list.files("../Data/", pattern = "[0-9].csv", full.names = T)
-paed <- map_df(file_names, read_csv)
-```
+    ```r
+    library(tidyverse)
+    file_names <- list.files("../Data/", pattern = "[0-9].csv", full.names = T)
+    paed <- map_df(file_names, read_csv)
+    ```
 
 4. Build a function using this package to get all trials of interest.
 
