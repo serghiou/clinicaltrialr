@@ -11,17 +11,63 @@
 
 1. Use [Advanced Search](https://www.clinicaltrials.gov/ct2/search/advanced?cond=&term=&cntry=&state=&city=&dist=) to find records of interest and copy the URL, e.g. https://www.clinicaltrials.gov/ct2/results?type=Intr&age=0.
 
-2. Download the results. The website only allows downloading the top 10,000. The above query led to 45,000 results, for which reason I downloaded them in chunks:
+2. Download the results. The website only allows downloading the top 10,000. The above query led to 45,000 results, for which reason I downloaded them in chunks in a folder I called "Data":
 
-    - https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=1
+    - [Chunk 1](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=1)
 
-    - https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=2
+    - [Chunk 2](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=2)
 
-    - https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=3
+    - [Chunk 3](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=3)
 
-    - https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=4
+    - [Chunk 4](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=4)
 
-    - https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=5
+    - [Chunk 5](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=5)
+    
+3. Import into R.
+
+```{r}
+library(tidyverse)
+file_names <- list.files("../Data/", pattern = "[0-9].csv", full.names = T)
+paed <- map_df(file_names, read_csv)
+```
+
+4. Build a function using this package to get all trials of interest.
+
+```{r}
+library(clinicaltrialr)
+
+get_trials <- function(NCT) {
+  
+  NCT %>% 
+    clinicaltrialr::get_xml_document() %>% 
+    clinicaltrialr::extract_fields()
+  
+}
+```
+
+5. Download all records and construct a dataframe.
+
+```{r}
+library(pbapply)
+trials_list <- pblapply(paed$`NCT Number`, get_trials, cl = 7)
+trials <- do.call(dplyr::bind_rows, trials_list)
+```
+
+6. Re-extract values for which the algorithm was not allowed acccess to the website.
+
+```{r}
+missing_index <- grep("Error in open", trials_list)
+missing_nct <- paed$`NCT Number`[missing_index]
+missing_doc <- pblapply(missing_nct, get_trials, cl = 7)
+trials_list[missing_index] <- missing_doc
+trials <- do.call(dplyr::bind_rows, trials)
+```
+
+7. Save as CSV in a folder called "Output".
+
+```{r}
+write_csv(trials, "../Output/pediatric-trial-records.csv")
+```
 
 
 ## Alternatives
