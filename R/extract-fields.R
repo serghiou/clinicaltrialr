@@ -15,6 +15,7 @@ extract_fields <- function(xml_document) {
 
   xpath <- c(
     "id_info/nct_id",
+    "status",
     "brief_title",
     "official_title",
     "brief_summary/textblock",
@@ -23,6 +24,7 @@ extract_fields <- function(xml_document) {
     "phase",
     "study_design_info/allocation",
     "study_design_info/intervention_model",
+    "study_design_info/intervention_model_description",
     "study_design_info/primary_purpose",
     "study_design_info/masking",
     "condition",
@@ -30,16 +32,26 @@ extract_fields <- function(xml_document) {
     "intervention/intervention_name",
     "intervention/intervention_desc",
     "eligibility/criteria/textblock",
+    "gender",
+    "minimum_age",
+    "maximum_age",
     "enrollment[@type='Actual']",
     "primary_outcome/measure",
     "primary_outcome/time_frame",
     "primary_outcome/description",
+    "secondary_outcome/measure",
+    "secondary_outcome/time_frame",
+    "secondary_outcome/description",
+    "location/facility/name",
+    "location/facility/address/city",
+    "location/facility/address/country",
     "reference/citation",
     "reference/PMID"
   )
 
   field_names <- c(
     "nct_id",
+    "status",
     "brief_title",
     "official_title",
     "brief_summary",
@@ -48,6 +60,7 @@ extract_fields <- function(xml_document) {
     "phase",
     "allocation",
     "intervention_model",
+    "intervention_model_description",
     "primary_purpose",
     "masking",
     "condition",
@@ -55,10 +68,19 @@ extract_fields <- function(xml_document) {
     "intervention_name",
     "intervention_desc",
     "eligibility_criteria",
+    "gender",
+    "minimum_age",
+    "maximum_age",
     "enrollment_actual",
     "primary_outcome_measure",
     "primary_outcome_time_frame",
     "primary_outcome_description",
+    "secondary_outcome_measure",
+    "secondary_outcome_time_frame",
+    "secondary_outcome_description",
+    "location_name",
+    "location_city",
+    "location_country",
     "publications_reference",
     "publications_PMID"
   )
@@ -82,6 +104,7 @@ extract_fields <- function(xml_document) {
     xml2::xml_find_all(xpath) %>%
     xml2::xml_contents() %>%
     xml2::xml_text() %>%
+    # TODO: remove the \n because it is messing up the csv file
     paste(collapse = "; ")
 
 }
