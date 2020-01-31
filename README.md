@@ -85,6 +85,6 @@ This release only contains the basic functions to download and extract popular f
 2. A function to download all records of interest in bulk and process that XML file, rather than downloading one at a time.
 3. A function to download all of ClinicalTrials.gov.
 4. A function to extract even more fields from each study record.
-5. Functions to build new fields (e.g. is this a cluster trial, shold this have already been published, etc.)
+5. Functions to build new fields (e.g. is this a cluster trial, should this have already been published, etc.)
 
 </div>
