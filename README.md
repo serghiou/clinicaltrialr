@@ -9,12 +9,24 @@
 
 ## Usage
 
+1. Use [Advanced Search](https://www.clinicaltrials.gov/ct2/search/advanced?cond=&term=&cntry=&state=&city=&dist=) to find records of interest and copy the URL, e.g. https://www.clinicaltrials.gov/ct2/results?type=Intr&age=0.
 
+2. Download the results. The website only allows downloading the top 10,000. The above query led to 45,000 results, for which reason I downloaded them in chunks:
+
+- https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=1
+
+- https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=2
+
+- https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=3
+
+- https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=4
+
+- https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=5
 
 
 ## Alternatives
 
-* ClinicalTrials.gov has its own [API interface](https://clinicaltrials.gov/api/gui). This can be used to create an XML file of [all records about studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_full_study), a CSV file with [specific fields from all studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_study_fields) or a CSV file with [just one field of interest for all studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_field_values). These allow the retrieval of at most 100, 1000 or all records, but using the fields `min_rnk` and `max_rnk` it is possible to, in chunks, download all records of interest.
+* ClinicalTrials.gov has its own [API interface](https://clinicaltrials.gov/api/gui) to their new API (this package at the moment uses the old API). This can be used to create an XML file of [all records about studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_full_study), a CSV file with [specific fields from all studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_study_fields) or a CSV file with [just one field of interest for all studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_field_values). These allow the retrieval of at most 100, 1000 or all records, but using the fields `min_rnk` and `max_rnk` it is possible to, in chunks, download all records of interest.
 
 * 
 
