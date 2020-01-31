@@ -64,7 +64,7 @@ write_csv(trials, "../Output/pediatric-trial-records.csv")
 
 * ClinicalTrials.gov has its own [API interface](https://clinicaltrials.gov/api/gui) to their new API (this package at the moment uses the old API). This can be used to create an XML file of [all records about studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_full_study), a CSV file with [specific fields from all studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_study_fields) or a CSV file with [just one field of interest for all studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_field_values). These allow the retrieval of at most 100, 1000 or all records, but using the fields `min_rnk` and `max_rnk` it is possible to, in chunks, download all records of interest.
 
-* 
+* There is an [rclinicaltrials](https://github.com/sachsmc/rclinicaltrials) package, which does not download trials as desired.
 
 
 ## Acknowledgements
