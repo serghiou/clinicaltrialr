@@ -23,41 +23,41 @@
 
 4. Build a function using this package to get all trials of interest.
 
-```r
-library(clinicaltrialr)
+    ```r
+    library(clinicaltrialr)
 
-get_trials <- function(NCT) {
-  
-  NCT %>% 
-    clinicaltrialr::get_xml_document() %>% 
-    clinicaltrialr::extract_fields()
-  
-}
-```
+    get_trials <- function(NCT) {
+
+      NCT %>% 
+        clinicaltrialr::get_xml_document() %>% 
+        clinicaltrialr::extract_fields()
+
+    }
+    ```
 
 5. Download all records and construct a dataframe.
 
-```r
-library(pbapply)
-trials_list <- pblapply(paed$`NCT Number`, get_trials, cl = 7)
-trials <- do.call(dplyr::bind_rows, trials_list)
-```
+    ```r
+    library(pbapply)
+    trials_list <- pblapply(paed$`NCT Number`, get_trials, cl = 7)
+    trials <- do.call(dplyr::bind_rows, trials_list)
+    ```
 
 6. Re-extract values for which the algorithm was not allowed acccess to the website.
 
-```r
-missing_index <- grep("Error in open", trials_list)
-missing_nct <- paed$`NCT Number`[missing_index]
-missing_doc <- pblapply(missing_nct, get_trials, cl = 7)
-trials_list[missing_index] <- missing_doc
-trials <- do.call(dplyr::bind_rows, trials)
-```
+    ```r
+    missing_index <- grep("Error in open", trials_list)
+    missing_nct <- paed$`NCT Number`[missing_index]
+    missing_doc <- pblapply(missing_nct, get_trials, cl = 7)
+    trials_list[missing_index] <- missing_doc
+    trials <- do.call(dplyr::bind_rows, trials)
+    ```
 
 7. Save as CSV in a folder called "Output".
 
-```r
-write_csv(trials, "../Output/pediatric-trial-records.csv")
-```
+    ```r
+    write_csv(trials, "../Output/pediatric-trial-records.csv")
+    ```
 
 
 ## Alternatives
