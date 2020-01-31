@@ -11,17 +11,7 @@
 
 1. Use [Advanced Search](https://www.clinicaltrials.gov/ct2/search/advanced?cond=&term=&cntry=&state=&city=&dist=) to find records of interest and copy the URL, e.g. https://www.clinicaltrials.gov/ct2/results?type=Intr&age=0.
 
-2. Download the results. The website only allows downloading the top 10,000. The above query led to 45,000 results, for which reason I downloaded them in chunks in a folder I called "Data":
-
-    - [Chunk 1](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=1)
-
-    - [Chunk 2](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=2)
-
-    - [Chunk 3](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=3)
-
-    - [Chunk 4](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=4)
-
-    - [Chunk 5](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=5)
+2. Download the results. The website only allows downloading the top 10,000. The above query led to 45,000 results, for which reason I downloaded them in chunks in a folder I called "Data": [Chunk 1](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=1), [Chunk 2](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=2), [Chunk 3](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=3), [Chunk 4](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=4), [Chunk 5](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=5)
     
 3. Import into R.
 
