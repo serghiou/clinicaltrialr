@@ -4,7 +4,7 @@
 
 ## Overview
 
-[ClinicalTrials.gov](https://www.clinicaltrials.gov/) provides a fantastic resource of data on all registered clinical trials. However, even though it also provides [API access](https://www.clinicaltrials.gov/ct2/resources/download), it is not possible to easily create a readily analysable database with all study fields of interest. This package aims to make using data from ClinicalTrials.gov as easy as it could be, by providing the functions required to extract all data for all studies of interest. It does so by creating an interface to the old ClinicalTrials.gov API, which can be found [here](https://www.clinicaltrials.gov/ct2/resources/download); more in the alternative sources below.
+[ClinicalTrials.gov](https://www.clinicaltrials.gov/) provides a fantastic resource of data on all registered clinical trials. However, even though it also provides [API access](https://www.clinicaltrials.gov/ct2/resources/download), it is not possible to easily create a readily analysable database with all study fields of interest. This package aims to make using data from ClinicalTrials.gov as easy as it could be, by providing the functions required to extract all data for all studies of interest. It does so by creating an interface to the old ClinicalTrials.gov API, which can be found [here](https://www.clinicaltrials.gov/ct2/resources/download); more in the alternative sources [below](#Alternatives).
 
 
 ## Usage
