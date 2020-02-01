@@ -9,23 +9,24 @@
 
 ## Usage
 
-1. Use [Advanced Search](https://www.clinicaltrials.gov/ct2/search/advanced?cond=&term=&cntry=&state=&city=&dist=) to find records of interest and copy the URL, e.g. https://www.clinicaltrials.gov/ct2/results?type=Intr&age=0.
-
-2. Download the results. The website only allows downloading the top 10,000. The above query led to 45,000 results, for which reason I downloaded them in chunks in a folder I called "Data": [Chunk 1](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=1), [Chunk 2](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=2), [Chunk 3](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=3), [Chunk 4](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=4), [Chunk 5](https://www.clinicaltrials.gov/ct2/download_fields?type=Intr&age=0&down_count=10000&down_fmt=csv&down_flds=all&down_chunk=5).
-    
-3. Import into R.
+1. Install package.
 
     ```r
-    library(tidyverse)
-    file_names <- list.files("../Data/", pattern = "[0-9].csv", full.names = T)
-    paed <- map_df(file_names, read_csv)
+    devtools::install_github(serghiou/clinicaltrialr)
+    ```
+
+2. Use [Advanced Search](https://www.clinicaltrials.gov/ct2/search/advanced?cond=&term=&cntry=&state=&city=&dist=) to find records of interest and copy the URL, e.g. https://www.clinicaltrials.gov/ct2/results?type=Intr&age=0.
+
+3. Download the results table corresponding to the copied link.
+
+    ```r
+    library(clinicaltrialr)
+    results <- get_results_table("https://www.clinicaltrials.gov/ct2/results?type=Intr&age=0)
     ```
 
 4. Build a function using this package to get all trials of interest.
 
     ```r
-    library(clinicaltrialr)
-
     get_trials <- function(NCT) {
 
       NCT %>% 
@@ -39,7 +40,7 @@
 
     ```r
     library(pbapply)
-    trials_list <- pbapply::pblapply(paed$`NCT Number`, get_trials, cl = 7)
+    trials_list <- pbapply::pblapply(results$`NCT Number`, get_trials, cl = 7)
     trials <- do.call(dplyr::bind_rows, trials_list)
     ```
 
@@ -81,10 +82,11 @@
 This release only contains the basic functions to download and extract popular fields of studies on ClinicalTrials.gov. The following functions would also be great to have and contributions by anyone with the time and interest to enhance this package are more than welcome!
 
 1. Migrate the current functions to the [new](https://clinicaltrials.gov/api/gui/home) API, rather than the [old](https://www.clinicaltrials.gov/ct2/resources/download) one.
-1. A function to query ClinicalTrials.gov right from R.
 2. A function to download all records of interest in bulk and process that XML file, rather than downloading one at a time.
 3. A function to download all of ClinicalTrials.gov.
 4. A function to extract even more fields from each study record.
-5. Functions to build new fields (e.g. is this a cluster trial, should this have already been published, etc.)
+5. Tidy up complex fields, such as primary and secondary outcomes, which can be placed within lists.
+6. Functions to help with data post-processing (e.g. identify cluster trials, overall survival outcomes, etc.)
+7. Additional functions (e.g. should this have already been published, etc.)
 
 </div>
