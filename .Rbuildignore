@@ -2,3 +2,7 @@
 ^\.Rprofile$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^README\.md$
+^cran-comments\.md$
+^\.github$
+^LICENSE\.md$
