@@ -5,10 +5,12 @@
 #' @param URL The URL given after searching on ClinicalTrials.gov.
 #' @return A dataframe of the ClinicalTrials.gov results table.
 #' @examples
+#' \dontrun{
 #' # Copy-paste the URL from the ClinicalTrials.gov website
 #' URL <- "http://www.clinicaltrials.gov/ct2/results?cond=Heart+Failure"
 #' # Download results table
 #' results_table <- get_results_table(URL)
+#' }
 #' @export
 get_results_table <- function(URL) {
 

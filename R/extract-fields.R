@@ -6,10 +6,12 @@
 #' @return A dataframe with the commonly used fields; if a field was not found,
 #'     then this field will be empty, i.e. `character()`
 #' @examples
+#' \dontrun{
 #' # Get the XML of study NCT03478891
 #' xml_document <- get_xml_document("NCT03478891")
 #' # Extract fields of interest
 #' study <- extract_fields(xml_document)
+#' }
 #' @export
 extract_fields <- function(xml_document) {
 
