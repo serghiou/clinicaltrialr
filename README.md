@@ -21,7 +21,7 @@
 
     ```r
     library(clinicaltrialr)
-    results <- get_results_table("https://www.clinicaltrials.gov/ct2/results?type=Intr&age=0)
+    results <- get_results_table("https://www.clinicaltrials.gov/ct2/results?type=Intr&age=0")
     ```
 
 4. Build a function using this package to get all trials of interest.
@@ -41,7 +41,7 @@
     ```r
     library(pbapply)
     trials_list <- pbapply::pblapply(results$`NCT Number`, get_trials, cl = 7)
-    trials <- do.call(dplyr::bind_rows, trials_list)
+    trials <- dplyr::bind_rows(trials_list)
     ```
 
 6. Re-extract values for which the algorithm was not allowed acccess to the website.
@@ -51,7 +51,7 @@
     missing_nct <- paed$`NCT Number`[missing_index]
     missing_doc <- pblapply(missing_nct, get_trials, cl = 7)
     trials_list[missing_index] <- missing_doc
-    trials <- do.call(dplyr::bind_rows, trials)
+    trials <- dplyr::bind_rows(trials)
     ```
 
 7. Save as CSV in a folder called "Output".
