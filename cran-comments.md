@@ -6,7 +6,11 @@
 
 ## R CMD check results
 
-* There were no ERRORs, WARNINGs or NOTEs
+* There were no ERRORs or WARNINGs 
+
+* Three NOTEs:
+
+    * I confirm that all three are not spelling mistakes or NOTEs
 
 ## Downstream dependencies
 
