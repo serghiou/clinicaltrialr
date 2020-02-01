@@ -3,3 +3,4 @@ packrat/lib*/
 .Rprofile
 *.Rproj
 .Rhistory
+*.DS_Store
