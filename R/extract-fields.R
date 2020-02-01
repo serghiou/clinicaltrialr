@@ -15,7 +15,7 @@ extract_fields <- function(xml_document) {
 
   xpath <- c(
     "id_info/nct_id",
-    "status",
+    "overall_status",
     "brief_title",
     "official_title",
     "brief_summary/textblock",
