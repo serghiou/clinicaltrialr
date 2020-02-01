@@ -4,7 +4,7 @@
 \alias{write_xml_document}
 \title{Save a downloaded xml_document as an XML file}
 \usage{
-write_xml_document(xml_document, path, ...)
+write_xml_document(xml_document, path = "", ...)
 }
 \arguments{
 \item{xml_document}{The xml_document received from `get_xml_document`.}
@@ -20,8 +20,11 @@ The study record as an XML file in the designed location.
 Saves the study record as an XML in the specified path.
 }
 \examples{
+\dontrun{
 # Get the XML of study NCT03478891
 xml_document <- get_xml_document("NCT03478891")
 # Save the XML
-write_xml_document(xml_document, "/Users/Stelios/Desktop")
+tmp <- tempfile()  # only required for this example, not in using the library
+write_xml_document(xml_document, tmp)
+}
 }

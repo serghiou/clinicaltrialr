@@ -7,12 +7,15 @@
 #' @param ... Additional arguments to be passed to `xml2::write_xml`.
 #' @return The study record as an XML file in the designed location.
 #' @examples
+#' \dontrun{
 #' # Get the XML of study NCT03478891
 #' xml_document <- get_xml_document("NCT03478891")
 #' # Save the XML
-#' write_xml_document(xml_document, "/Users/Stelios/Desktop")
+#' tmp <- tempfile()  # only required for this example, not in using the library
+#' write_xml_document(xml_document, tmp)
+#' }
 #' @export
-write_xml_document <- function(xml_document, path, ...) {
+write_xml_document <- function(xml_document, path = "", ...) {
 
   file_name <-
     xml_document %>%
