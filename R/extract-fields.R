@@ -87,7 +87,7 @@ extract_fields <- function(xml_document) {
 
   field_content <- lapply(xpath, .get_text, xml_document = xml_document)
   names(field_content) <- field_names
-  tibble::as_tibble(field_content) %>% mutate_all(stringr::str_squish)
+  tibble::as_tibble(field_content) %>% dplyr::mutate_all(stringr::str_squish)
 }
 
 
