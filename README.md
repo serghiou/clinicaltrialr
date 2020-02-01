@@ -15,7 +15,7 @@
     devtools::install_github(serghiou/clinicaltrialr)
     ```
 
-2. Use [Advanced Search](https://www.clinicaltrials.gov/ct2/search/advanced?cond=&term=&cntry=&state=&city=&dist=) to find records of interest and copy the URL, e.g. https://www.clinicaltrials.gov/ct2/results?type=Intr&age=0.
+2. Build a query using [Advanced Search](https://www.clinicaltrials.gov/ct2/search/advanced?cond=&term=&cntry=&state=&city=&dist=) and copy the URL, e.g. https://www.clinicaltrials.gov/ct2/results?type=Intr&age=0.
 
 3. Download the results table corresponding to the copied link.
 
