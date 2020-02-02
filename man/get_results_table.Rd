@@ -16,8 +16,10 @@ A dataframe of the ClinicalTrials.gov results table.
 Returns the study record as an xml_document object.
 }
 \examples{
+\dontrun{
 # Copy-paste the URL from the ClinicalTrials.gov website
 URL <- "http://www.clinicaltrials.gov/ct2/results?cond=Heart+Failure"
 # Download results table
 results_table <- get_results_table(URL)
+}
 }

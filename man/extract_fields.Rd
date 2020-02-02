@@ -17,8 +17,10 @@ A dataframe with the commonly used fields; if a field was not found,
 Returns the commonly used information from ClinicalTrials.gov.
 }
 \examples{
+\dontrun{
 # Get the XML of study NCT03478891
 xml_document <- get_xml_document("NCT03478891")
 # Extract fields of interest
 study <- extract_fields(xml_document)
+}
 }
