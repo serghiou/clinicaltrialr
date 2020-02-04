@@ -8,9 +8,9 @@
 
 * There were no ERRORs or WARNINGs 
 
-* Three NOTEs:
+* One NOTE:
 
-    * I confirm that all three are not spelling mistakes or NOTEs
+    * I confirm that the NOTE is not relevant
 
 ## Downstream dependencies
 
