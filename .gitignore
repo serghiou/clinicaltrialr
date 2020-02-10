@@ -4,3 +4,4 @@ packrat/lib*/
 *.Rproj
 .Rhistory
 *.DS_Store
+LICENSE

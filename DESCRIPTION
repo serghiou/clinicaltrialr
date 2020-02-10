@@ -1,13 +1,13 @@
 Package: clinicaltrialr
 Type: Package
 Title: Get Complete Study Records from ClinicalTrials.gov
-Version: 0.3.0.9000
+Version: 0.3.0
 Authors@R: c(person("Stylianos", "Serghiou", role = c("aut", "cre"),
                      email = "stelios.serghiou@gmail.com"))
 Description: Takes a user-provided NCT ID, downloads the respective
     study record from ClinicalTrials.gov and turns its useful fields into an
     easy to use dataset.
-License: GPL-3 + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
