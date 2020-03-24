@@ -17,6 +17,13 @@ extract_fields <- function(xml_document) {
 
   xpath <- c(
     "id_info/nct_id",
+    "study_first_submitted",
+    "study_first_posted[@type='Actual']",
+    "last_update_posted[@type='Actual']",
+    "start_date[@type='Actual']",
+    "start_date[@type='Anticipated']",
+    "completion_date[@type='Actual']",
+    "completion_date[@type='Anticipated']",
     "overall_status",
     "brief_title",
     "official_title",
@@ -52,12 +59,23 @@ extract_fields <- function(xml_document) {
     "location/facility/name",
     "location/facility/address/city",
     "location/facility/address/country",
+    "patient_data",
+    "patient_data/sharing_ipd",
+    "sponsors//agency",
+    "sponsors//agency_class",
     "reference/citation",
     "reference/PMID"
   )
 
   field_names <- c(
     "nct_id",
+    "date_study_first_submitted",
+    "date_study_first_posted",
+    "date_last_update_posted",
+    "date_started_actual",
+    "date_started_anticipated",
+    "date_completed_actual",
+    "date_completed_anticipated",
     "status",
     "brief_title",
     "official_title",
@@ -93,6 +111,10 @@ extract_fields <- function(xml_document) {
     "location_name",
     "location_city",
     "location_country",
+    "patient_data_all",
+    "patient_data_sharing_ipd",
+    "sponsors_agency",
+    "sponsors_agency_class",
     "publications_reference",
     "publications_PMID"
   )
