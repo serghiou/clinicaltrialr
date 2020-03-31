@@ -64,7 +64,11 @@ extract_fields <- function(xml_document) {
     "sponsors//agency",
     "sponsors//agency_class",
     "reference/citation",
-    "reference/PMID"
+    "reference/PMID",
+    "overall_contact/last_name",
+    "overall_contact/email",
+    "overall_contact_backup/last_name",
+    "overall_contact_backup/email"
   )
 
   field_names <- c(
@@ -116,7 +120,11 @@ extract_fields <- function(xml_document) {
     "sponsors_agency",
     "sponsors_agency_class",
     "publications_reference",
-    "publications_PMID"
+    "publications_PMID",
+    "overall_contanct_last_name",
+    "overall_contanct_email",
+    "overall_contanct_backup_last_name",
+    "overall_contanct_backup_email"
   )
 
   field_content <- lapply(xpath, .get_text, xml_document = xml_document)
