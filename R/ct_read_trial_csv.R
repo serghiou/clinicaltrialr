@@ -20,7 +20,7 @@ ct_read_trial_csv <- function(xml_document) {
     first_submitted_date = "study_first_submitted",
     first_posted_date = "study_first_posted[@type='Actual']",
     results_first_posted_date = "results_first_submitted",
-    last_updated_posted_date = "last_update_posted[@type='Actual']",
+    last_update_posted_date = "last_update_posted[@type='Actual']",
     actual_study_start_date = "start_date[@type='Actual']",
     anticipated_study_start_date = "start_date[@type='Anticipated']",
     actual_primary_completion_date = "completion_date[@type='Actual']",
