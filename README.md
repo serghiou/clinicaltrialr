@@ -67,6 +67,8 @@
 
 * There is an [rclinicaltrials](https://github.com/sachsmc/rclinicaltrials) package. However, (a) it does not allow for the complicated kind of queries that I would like to use and for which I needed to use the Advanced Search function of the website and (b) it creates dataframes that are not easy to analyze and share with others possibly using other platforms.
 
+* A list of clinincal trial registry scrapers can be found in the [opentrials/registers GitHub repository](https://github.com/opentrials/registers).
+
 
 ## Acknowledgements
 
