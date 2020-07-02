@@ -21,17 +21,17 @@
 
     ```r
     library(clinicaltrialr)
-    results <- get_results_table("http://www.clinicaltrials.gov/ct2/results?cond=Heart+Failure")
+    results <- ct_read_results("http://www.clinicaltrials.gov/ct2/results?cond=Heart+Failure")
     ```
 
 4. Build a function using this package to get all trials of interest.
 
     ```r
-    get_trials <- function(NCT) {
+    read_trials <- function(NCT) {
 
       NCT %>% 
-        clinicaltrialr::get_xml_document() %>% 
-        clinicaltrialr::extract_fields()
+        clinicaltrialr::ct_read_trial_xml() %>% 
+        clinicaltrialr::ct_read_trial_csv()
 
     }
     ```
@@ -40,7 +40,7 @@
 
     ```r
     library(pbapply)
-    trials_list <- pbapply::pblapply(results$`NCT Number`, get_trials, cl = 7)
+    trials_list <- pbapply::pblapply(results$`NCT Number`, read_trials, cl = 7)
     trials <- dplyr::bind_rows(trials_list)
     ```
 
@@ -49,7 +49,7 @@
     ```r
     missing_index <- grep("Error in open", trials_list)
     missing_nct <- paed$`NCT Number`[missing_index]
-    missing_doc <- pblapply(missing_nct, get_trials, cl = 7)
+    missing_doc <- pblapply(missing_nct, read_trials, cl = 7)
     trials_list[missing_index] <- missing_doc
     trials <- dplyr::bind_rows(trials)
     ```

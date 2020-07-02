@@ -12,7 +12,7 @@
 #' results_table <- get_results_table(URL)
 #' }
 #' @export
-get_results_table <- function(URL) {
+ct_read_results <- function(URL) {
 
   # Get last portion
   query <- gsub("^.*\\?(.+$)", "\\1", URL)

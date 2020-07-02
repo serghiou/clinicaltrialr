@@ -1,4 +1,4 @@
-#' Get commonly used information from ClinicalTrials.gov
+#' Read commonly used information from ClinicalTrials.gov
 #'
 #' Returns the commonly used information from ClinicalTrials.gov.
 #'
@@ -8,12 +8,12 @@
 #' @examples
 #' \dontrun{
 #' # Get the XML of study NCT03478891
-#' xml_document <- get_xml_document("NCT03478891")
+#' xml_document <- ct_read_trial_xml("NCT03478891")
 #' # Extract fields of interest
 #' study <- extract_fields(xml_document)
 #' }
 #' @export
-extract_fields <- function(xml_document) {
+ct_read_trial_csv <- function(xml_document) {
 
   xpath <- c(
     "id_info/nct_id",
@@ -121,10 +121,10 @@ extract_fields <- function(xml_document) {
     "sponsors_agency_class",
     "publications_reference",
     "publications_PMID",
-    "overall_contanct_last_name",
-    "overall_contanct_email",
-    "overall_contanct_backup_last_name",
-    "overall_contanct_backup_email"
+    "overall_contact_last_name",
+    "overall_contact_email",
+    "overall_contact_backup_last_name",
+    "overall_contact_backup_email"
   )
 
   field_content <- lapply(xpath, .get_text, xml_document = xml_document)

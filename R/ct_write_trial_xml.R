@@ -2,7 +2,7 @@
 #'
 #' Saves the study record as an XML in the specified path.
 #'
-#' @param xml_document The xml_document received from `get_xml_document`.
+#' @param xml_document The xml_document received from `ct_read_trial_xml`.
 #' @param path The path to the directory in which the file should be saved.
 #' @param ... Additional arguments to be passed to `xml2::write_xml`.
 #' @return The study record as an XML file in the designed location.
@@ -15,7 +15,7 @@
 #' write_xml_document(xml_document, tmp)
 #' }
 #' @export
-write_xml_document <- function(xml_document, path = "", ...) {
+ct_write_trial_xml <- function(xml_document, path = "", ...) {
 
   file_name <-
     xml_document %>%

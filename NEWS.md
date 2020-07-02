@@ -2,13 +2,13 @@
 
 <div align="justify">
 
-* `get_results_table` downloads the results table of a query into a dataframe.
+* `ct_read_results` downloads the results table of a query into a dataframe.
 
-* `get_xml_document` downloads the full record of a study as an xml_document.
+* `ct_read_trial_xml` downloads the full record of a study as an xml_document.
 
-* `write_xml_document` saves the downloaded xml_document as an XML file.
+* `ct_write_trial_xml` saves the downloaded xml_document as an XML file.
 
-* `extract_fields` extracts popular fields from the full study record and creates a dataframe.
+* `ct_read_trial_csv` extracts popular fields from the full study record and creates a dataframe.
 
 
 </div>
