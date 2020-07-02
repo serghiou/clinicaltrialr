@@ -6,6 +6,8 @@
 
 * Add extraction_date to `ct_read_trial_csv` to mark date of data extraction.
 
+* Update names of date columns to match those seen on CT.gov.
+
 
 </div>
 
