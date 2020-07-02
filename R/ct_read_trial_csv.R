@@ -77,6 +77,7 @@ ct_read_trial_csv <- function(xml_document) {
   xpath %>%
     lapply(.get_text, xml_document = xml_document) %>%
     tibble::as_tibble() %>%
+    dplyr::mutate(extraction_date = date()) %>%
     dplyr::mutate_all(stringr::str_squish)
 }
 
