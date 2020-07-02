@@ -4,6 +4,8 @@
 
 * `ct_read_trial_csv` now also extracts Responsible Party, Study Sponsor and Collaborators.
 
+* Add extraction_date to `ct_read_trial_csv` to mark date of data extraction.
+
 
 </div>
 
