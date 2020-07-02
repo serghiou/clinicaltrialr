@@ -1,3 +1,12 @@
+# clinicaltrialr 0.4
+
+<div align="justify">
+
+* `ct_read_trial_csv` now also extracts Responsible Party, Study Sponsor and Collaborators.
+
+
+</div>
+
 # clinicaltrialr 0.3
 
 <div align="justify">
