@@ -2,19 +2,41 @@
 #'
 #' Returns the commonly used information from ClinicalTrials.gov.
 #'
-#' @param xml_document An xml_document from `get_xml_document`
-#' @return A dataframe with the commonly used fields; if a field was not found,
-#'     then this field will be empty, i.e. `character()`
+#' @param NCT The NCT code of the desired study as a character,
+#'     e.g. "NCT03478891".
+#' @param format The format of the output as a string. Either "csv" or "xml".
+#' @return If the selected format is "csv", a dataframe with the commonly used
+#'     fields; if a field was not found within the file, then this field will be
+#'     empty, i.e. `character()`. If the selected format is "xml", then it
+#'     returns the trial in xml_document format.
 #' @examples
 #' \dontrun{
 #' # Get the XML of study NCT03478891
-#' xml_document <- ct_read_trial_xml("NCT03478891")
+#' xml_document <- ct_read_trial("NCT03478891", format = "xml")
 #' # Extract fields of interest
-#' study <- extract_fields(xml_document)
+#' study <- ct_read_trial("NCT03478891", format = "csv")
 #' }
 #' @export
-ct_read_trial_csv <- function(xml_document) {
+ct_read_trial <- function(NCT, format = "csv") {
 
+  if (!format %in% c("csv", "xml")) {
+
+    return(message("Please use an accepted format: 'csv' or 'xml'."))
+
+  }
+
+  # Extract XML
+  URL <- paste0("https://clinicaltrials.gov/ct2/show/", NCT, "?displayxml=true")
+  xml_doc <- xml2::read_xml(URL)
+
+  # Return xml_doc if the xml format was selected
+  if (format == "xml") {
+
+    return(xml_doc)
+
+  }
+
+  # Define path to fields of interest
   xpath <- c(
     nct_id = "id_info/nct_id",
     nct_id_alias = "id_info/nct_alias",
@@ -127,8 +149,9 @@ ct_read_trial_csv <- function(xml_document) {
     study_doc_comment = "study_docs/study_doc/doc_comment"
   )
 
+  # Extract text of interest
   xpath %>%
-    lapply(.get_text, xml_document = xml_document) %>%
+    lapply(.get_text, xml_document = xml_doc) %>%
     tibble::as_tibble() %>%
     dplyr::mutate(extraction_date = date()) %>%
     dplyr::mutate_all(stringr::str_squish)
@@ -140,7 +163,8 @@ ct_read_trial_csv <- function(xml_document) {
 #' Returns the text desired according to xpath.
 #'
 #' @param xpath The XPath as a character, e.g. "id_info/nct_id"
-#' @param xml_document An xml_document from `get_xml_document`
+#' @param xml_document The xml_document version of an XML from
+#'     ClinicalTrials.gov
 #' @return The desired text as a character; if not found, then `character()`
 .get_text <- function(xml_document, xpath) {
 

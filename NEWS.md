@@ -1,3 +1,12 @@
+# clinicaltrialr 0.6
+
+<div align="justify">
+
+* `ct_read_trial` now extracts an xml or a csv.
+* `ct_read_trial` gains a new argument `format` to indicate "csv" or "xml".
+* `ct_read_trial` replaces both of `ct_read_trial_csv` and `ct_read_trial_xml`
+
+
 # clinicaltrialr 0.5
 
 <div align="justify">
