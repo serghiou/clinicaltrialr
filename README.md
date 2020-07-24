@@ -24,20 +24,20 @@
     results <- ct_read_results("http://www.clinicaltrials.gov/ct2/results?cond=Heart+Failure")
     ```
 
-4. Download all records and construct a dataframe with variables of interest.
+4. Download all records and construct a dataframe with variables of interest in parallel (for the non-parallelized version, remove the `cl` argument).
 
     ```r
     library(pbapply)
-    trials_list <- pbapply::pblapply(results$`NCT Number`, ct_read_trial, cl = 7)
+    trials_list <- pbapply::pblapply(results$`NCT Number`, ct_read_trial, cl = parallel::detectCores() - 1)
     ```
 
-5. (Optional) If an error occurred, re-extract values for which the algorithm was not allowed acccess to the website.
+5. (Optional) If an error occurred, re-extract values for which the algorithm was not allowed acccess to the website in parallel (for the non-parallelized version, remove the `cl` argument).
 
     ```r
     missing_index <- grep("Error in open", trials_list)
     missing_nct <- paed$`NCT Number`[missing_index]
-    missing_doc <- pblapply(missing_nct, read_trials, cl = 7)
-    trials_list[missing_index] <- missing_doc
+    missing_df <- pblapply(missing_nct, ct_read_trial, cl = parallel::detectCores() - 1)
+    trials_list[missing_index] <- missing_df
     ```
 
 6. Create the dataframe.
