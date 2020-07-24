@@ -1,3 +1,10 @@
+# clinicaltrialr 0.5
+
+<div align="justify">
+
+* `ct_read_trial_csv` now extracts a lot more fields.
+
+
 # clinicaltrialr 0.4
 
 <div align="justify">
@@ -8,8 +15,6 @@
 
 * Update names of date columns to match those seen on CT.gov.
 
-
-</div>
 
 # clinicaltrialr 0.3
 
