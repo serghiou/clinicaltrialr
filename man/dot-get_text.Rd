@@ -4,11 +4,10 @@
 \alias{.get_text}
 \title{Get the desired text from the xml_document}
 \usage{
-.get_text(xml_document, xpath)
+.get_text(xml_doc, xpath)
 }
 \arguments{
-\item{xml_document}{The xml_document version of an XML from
-ClinicalTrials.gov}
+\item{xml_doc}{The xml_document version of an XML from ClinicalTrials.gov}
 
 \item{xpath}{The XPath as a character, e.g. "id_info/nct_id"}
 }

@@ -2,7 +2,7 @@
 #'
 #' Returns the commonly used information from ClinicalTrials.gov.
 #'
-#' @param NCT The NCT code of a study as a character, e.g. "NCT03478891".
+#' @param xml_doc A trial from ClinincalTrials.gov as an xml_document.
 #' @param format The format of the output as a string. Either "csv" or "xml".
 #' @return If the selected format is "csv", a dataframe with the commonly used
 #'     fields; if a field was not found within the file, then this field will be
@@ -13,27 +13,10 @@
 #' # Get the XML of study NCT03478891
 #' xml_document <- ct_read_trial("NCT03478891", format = "xml")
 #' # Extract fields of interest
-#' study <- ct_read_trial("NCT03478891", format = "csv")
+#' study <- ct_read_trial_from_xml(xml_document)
 #' }
 #' @export
-ct_read_trial <- function(NCT, format = "csv") {
-
-  if (!format %in% c("csv", "xml")) {
-
-    return(message("Please use an accepted format: 'csv' or 'xml'."))
-
-  }
-
-  # Extract XML
-  URL <- paste0("https://clinicaltrials.gov/ct2/show/", NCT, "?resultsxml=true")
-  xml_doc <- xml2::read_xml(URL)
-
-  # Return xml_doc if the xml format was selected
-  if (format == "xml") {
-
-    return(xml_doc)
-
-  }
+ct_read_trial_from_xml <- function(xml_doc) {
 
   # Define path to fields of interest
   xpath <- c(
@@ -153,26 +136,8 @@ ct_read_trial <- function(NCT, format = "csv") {
 
   # Extract text of interest
   xpath %>%
-    lapply(.get_text, xml_doc = xml_doc) %>%
+    lapply(.get_text, xml_document = xml_doc) %>%
     tibble::as_tibble() %>%
     dplyr::mutate(extraction_date = date()) %>%
     dplyr::mutate_all(stringr::str_squish)
-}
-
-
-#' Get the desired text from the xml_document
-#'
-#' Returns the text desired according to xpath.
-#'
-#' @param xpath The XPath as a character, e.g. "id_info/nct_id"
-#' @param xml_doc The xml_document version of an XML from ClinicalTrials.gov
-#' @return The desired text as a character; if not found, then `character()`
-.get_text <- function(xml_doc, xpath) {
-
-  xml_doc %>%
-    xml2::xml_find_all(xpath) %>%
-    xml2::xml_contents() %>%
-    xml2::xml_text() %>%
-    paste(collapse = "; ")
-
 }
