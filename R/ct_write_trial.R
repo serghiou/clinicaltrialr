@@ -1,8 +1,9 @@
-#' Save a downloaded xml_document as an XML file
+#' Save a the XML file of a study
 #'
 #' Saves the study record as an XML in the specified path.
 #'
-#' @param xml_document The xml_document received from `ct_read_trial_xml`.
+#' @param NCT The NCT code of the desired study as a character,
+#'     e.g. "NCT03478891".
 #' @param path The path to the directory in which the file should be saved.
 #' @param ... Additional arguments to be passed to `xml2::write_xml`.
 #' @return The study record as an XML file in the designed location.
@@ -15,23 +16,13 @@
 #' write_xml_document(xml_document, tmp)
 #' }
 #' @export
-ct_write_trial_xml <- function(xml_document, path = "", ...) {
+ct_write_trial <- function(NCT, path = "", ...) {
 
-  file_name <-
-    xml_document %>%
-    xml2::xml_find_all("id_info/nct_id") %>%
-    xml2::xml_contents() %>%
-    xml2::xml_text() %>%
-    paste0(".xml")
+  # Extract XML
+  URL <- paste0("https://clinicaltrials.gov/ct2/show/", NCT, "?resultsxml=true")
+  xml_doc <- xml2::read_xml(URL)
 
-  if (!length(file_name)) {
-
-    stop("This XML file does not contain a valid NCT number.")
-
-  }
-
-  file <- file.path(path, file_name)
-  xml2::write_xml(xml_document, file, ...)
-
-
+  # Save
+  file <- file.path(path, NCT)
+  xml2::write_xml(xml_doc, file, ...)
 }
