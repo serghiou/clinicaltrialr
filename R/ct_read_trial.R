@@ -148,8 +148,8 @@ ct_read_trial <- function(NCT, format = "csv") {
     study_doc_url = "study_docs/study_doc/doc_url",
     study_doc_comment = "study_docs/study_doc/doc_comment",
 
-    p_value = "outcome_list/outcome/analysis_list/analysis/p_value",
-    p_value_method = "outcome_list/outcome/analysis_list/analysis/method"
+    p_value = "clinical_results/outcome_list/outcome/analysis_list//p_value",
+    p_value_method = "clinical_results/outcome_list/outcome/analysis_list//method"
   )
 
   # Extract text of interest
