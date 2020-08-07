@@ -24,25 +24,33 @@
     results <- ct_read_results("http://www.clinicaltrials.gov/ct2/results?cond=Heart+Failure")
     ```
 
-4. Download all records and construct a dataframe with variables of interest in parallel (for the non-parallelized version, remove the `cl` argument).
+4. Build a function using this package to get all trials of interest.
+
+    ```r
+    read_trials <- function(NCT) {
+
+      NCT %>% 
+        clinicaltrialr::ct_read_trial_xml() %>% 
+        clinicaltrialr::ct_read_trial_csv()
+
+    }
+    ```
+
+5. Download all records and construct a dataframe.
 
     ```r
     library(pbapply)
-    trials_list <- pbapply::pblapply(results$`NCT Number`, ct_read_trial, cl = parallel::detectCores() - 1)
+    trials_list <- pbapply::pblapply(results$`NCT Number`, read_trials, cl = 7)
+    trials <- dplyr::bind_rows(trials_list)
     ```
 
-5. (Optional) If an error occurred, re-extract values for which the algorithm was not allowed acccess to the website in parallel (for the non-parallelized version, remove the `cl` argument).
+6. Re-extract values for which the algorithm was not allowed acccess to the website.
 
     ```r
     missing_index <- grep("Error in open", trials_list)
     missing_nct <- paed$`NCT Number`[missing_index]
-    missing_df <- pblapply(missing_nct, ct_read_trial, cl = parallel::detectCores() - 1)
-    trials_list[missing_index] <- missing_df
-    ```
-
-6. Create the dataframe.
-
-    ```r
+    missing_doc <- pblapply(missing_nct, read_trials, cl = 7)
+    trials_list[missing_index] <- missing_doc
     trials <- dplyr::bind_rows(trials)
     ```
 
@@ -55,11 +63,11 @@
 
 ## Alternatives
 
-* ClinicalTrials.gov has its own [API interface](https://clinicaltrials.gov/api/gui) to their new API (this package at the moment uses the old API). This can be used to create an XML file of [all records about studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_full_study), a CSV file with [specific fields from all studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_study_fields) or a CSV file with [just one field of interest for all studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_field_values). These allow the retrieval of at most 100, 1000 or all records, but using the fields `min_rnk` and `max_rnk` it is possible to, in chunks, download all records of interest (in XML for the former, in XML/CSV for the latter two). However, these records can only contain a maximum of 20 variables, which means that multiple requests would have to be done to fulfill searches of more than 20 records.
+* ClinicalTrials.gov has its own [API interface](https://clinicaltrials.gov/api/gui) to their new API (this package at the moment uses the old API). This can be used to create an XML file of [all records about studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_full_study), a CSV file with [specific fields from all studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_study_fields) or a CSV file with [just one field of interest for all studies of interest](https://clinicaltrials.gov/api/gui/demo/simple_field_values). These allow the retrieval of at most 100, 1000 or all records, but using the fields `min_rnk` and `max_rnk` it is possible to, in chunks, download all records of interest (in XML for the former, in XML/CSV for the latter two).
 
-* There is an [rclinicaltrials](https://github.com/sachsmc/rclinicaltrials) package. However, (a) it does not allow for the complicated kind of queries that I would like to use and for which I needed to use the Advanced Search function of the website and (b) it creates dataframes that are not easy to analyze and share with others possibly using other platforms (e.g. dataframes that contain lists).
+* There is an [rclinicaltrials](https://github.com/sachsmc/rclinicaltrials) package. However, (a) it does not allow for the complicated kind of queries that I would like to use and for which I needed to use the Advanced Search function of the website and (b) it creates dataframes that are not easy to analyze and share with others possibly using other platforms.
 
-* A list of clinincal trial registry scrapers can be found in the [opentrials/registers GitHub repository](https://github.com/opentrials/registers), however most of these are old and poorly maintained.
+* A list of clinincal trial registry scrapers can be found in the [opentrials/registers GitHub repository](https://github.com/opentrials/registers).
 
 
 ## Acknowledgements

@@ -1,7 +1,7 @@
-packrat/lib*/
 .Rproj.user
 .Rprofile
-*.Rproj
 .Rhistory
+*.Rproj
 *.DS_Store
 LICENSE
+packrat/lib*/
