@@ -26,7 +26,7 @@ ct_read_trial <- function(NCT, format = "csv") {
   }
 
   # Extract XML
-  URL <- paste0("https://clinicaltrials.gov/ct2/show/", NCT, "?displayxml=true")
+  URL <- paste0("https://clinicaltrials.gov/ct2/show/", NCT, "?resultsxml=true")
   xml_doc <- xml2::read_xml(URL)
 
   # Return xml_doc if the xml format was selected
@@ -146,7 +146,10 @@ ct_read_trial <- function(NCT, format = "csv") {
     study_doc_id = "study_docs/study_doc/doc_id",
     study_doc_type = "study_docs/study_doc/doc_type",
     study_doc_url = "study_docs/study_doc/doc_url",
-    study_doc_comment = "study_docs/study_doc/doc_comment"
+    study_doc_comment = "study_docs/study_doc/doc_comment",
+
+    p_value = "outcome_list/outcome/analysis_list/analysis/p_value",
+    p_value_method = "outcome_list/outcome/analysis_list/analysis/method"
   )
 
   # Extract text of interest
