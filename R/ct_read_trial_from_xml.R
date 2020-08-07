@@ -135,7 +135,7 @@ ct_read_trial_from_xml <- function(xml_doc) {
 
   # Extract text of interest
   xpath %>%
-    lapply(.get_text, xml_document = xml_doc) %>%
+    lapply(.get_text, xml_doc = xml_doc) %>%
     tibble::as_tibble() %>%
     dplyr::mutate(extraction_date = date()) %>%
     dplyr::mutate_all(stringr::str_squish)
