@@ -3,7 +3,6 @@
 #' Returns the commonly used information from ClinicalTrials.gov.
 #'
 #' @param xml_doc A trial from ClinincalTrials.gov as an xml_document.
-#' @param format The format of the output as a string. Either "csv" or "xml".
 #' @return If the selected format is "csv", a dataframe with the commonly used
 #'     fields; if a field was not found within the file, then this field will be
 #'     empty, i.e. `character()`. If the selected format is "xml", then it

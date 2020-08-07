@@ -8,8 +8,6 @@ ct_read_trial_from_xml(xml_doc)
 }
 \arguments{
 \item{xml_doc}{A trial from ClinincalTrials.gov as an xml_document.}
-
-\item{format}{The format of the output as a string. Either "csv" or "xml".}
 }
 \value{
 If the selected format is "csv", a dataframe with the commonly used
