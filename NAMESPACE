@@ -2,5 +2,6 @@
 
 export(ct_read_results)
 export(ct_read_trial)
+export(ct_read_trial_from_xml)
 export(ct_write_trial)
 importFrom(magrittr,"%>%")
