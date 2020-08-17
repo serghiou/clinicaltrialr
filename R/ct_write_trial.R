@@ -16,13 +16,13 @@
 #' write_xml_document(xml_document, tmp)
 #' }
 #' @export
-ct_write_trial <- function(NCT, path = "", ...) {
+ct_write_trial <- function(NCT, path = ".", ...) {
 
   # Extract XML
   URL <- paste0("https://clinicaltrials.gov/ct2/show/", NCT, "?resultsxml=true")
   xml_doc <- xml2::read_xml(URL)
 
   # Save
-  file <- file.path(path, NCT)
+  file <- file.path(path, NCT) %>% paste0(".xml")
   xml2::write_xml(xml_doc, file, ...)
 }
