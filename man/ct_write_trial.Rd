@@ -4,7 +4,7 @@
 \alias{ct_write_trial}
 \title{Save a the XML file of a study}
 \usage{
-ct_write_trial(NCT, path = "", ...)
+ct_write_trial(NCT, path = ".", ...)
 }
 \arguments{
 \item{NCT}{The NCT code of the desired study as a character,
