@@ -17,7 +17,7 @@
 #' @export
 ct_read_trial_from_xml <- function(xml_doc) {
 
-  # Define path to fields of interest
+  # Define path to fields of interest as per ct_read_trial
   xpath <- c(
     nct_id = "id_info/nct_id",
     nct_id_alias = "id_info/nct_alias",
