@@ -87,6 +87,7 @@ ct_read_trial <- function(NCT, format = "csv") {
 
     enrollment_target = "enrollment[@type='Anticipated']",
     enrollment_actual = "enrollment[@type='Actual']",
+    enrollment_unspecified = "enrollment[not(@*)]",
 
     primary_outcome_measure = "primary_outcome/measure",
     primary_outcome_time_frame = "primary_outcome/time_frame",
