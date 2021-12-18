@@ -141,3 +141,21 @@ ct_read_trial_from_xml <- function(xml_doc) {
     dplyr::mutate(extraction_date = date()) %>%
     dplyr::mutate_all(stringr::str_squish)
 }
+
+
+#' Get the desired text from the xml_document
+#'
+#' Returns the text desired according to xpath.
+#'
+#' @param xpath The XPath as a character, e.g. "id_info/nct_id"
+#' @param xml_doc The xml_document version of an XML from ClinicalTrials.gov
+#' @return The desired text as a character; if not found, then `character()`
+.get_text <- function(xml_doc, xpath) {
+
+  xml_doc %>%
+    xml2::xml_find_all(xpath) %>%
+    xml2::xml_contents() %>%
+    xml2::xml_text() %>%
+    paste(collapse = "; ")
+
+}
