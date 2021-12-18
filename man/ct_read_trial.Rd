@@ -4,12 +4,12 @@
 \alias{ct_read_trial}
 \title{Read commonly used information from ClinicalTrials.gov}
 \usage{
-ct_read_trial(NCT, format = "csv")
+ct_read_trial(NCT, export_format = "csv")
 }
 \arguments{
 \item{NCT}{The NCT code of a study as a character, e.g. "NCT03478891".}
 
-\item{format}{The format of the output as a string. Either "csv" or "xml".}
+\item{export_format}{The format of the output as a string. Either "csv" or "xml".}
 }
 \value{
 If the selected format is "csv", a dataframe with the commonly used
@@ -23,8 +23,8 @@ Returns the commonly used information from ClinicalTrials.gov.
 \examples{
 \dontrun{
 # Get the XML of study NCT03478891
-xml_document <- ct_read_trial("NCT03478891", format = "xml")
+xml_document <- ct_read_trial("NCT03478891", export_format = "xml")
 # Extract fields of interest
-study <- ct_read_trial("NCT03478891", format = "csv")
+study <- ct_read_trial("NCT03478891", export_format = "csv")
 }
 }
