@@ -1,5 +1,12 @@
 <div align="justify">
 
+# clinicaltrialr 0.6.7
+
+* `ct_read_trial` now uses `ct_read_trial_from_xml` internally.
+* `ct_read_trial` argument `format` has been updated to `export_format`.
+* `README.md` examples are now updated to reflect changes in the package.
+
+
 # clinicaltrialr 0.6.5
 
 * `ct_read_trial` now also extracts p-values and hypothesis test method.
