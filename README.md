@@ -37,6 +37,7 @@
     if (!('pbapply' %in% installed.packages()[,"Package"])) install.packages("pbapply")
     
     # Extract data from each trial (this is time-consuming)
+    # (note that you may need to use a different cl number if your CPU has less than 8 cores)
     trials_list <- pbapply::pblapply(results$`NCT Number`, ct_read_trial, cl = 7)
     trials <- dplyr::bind_rows(trials_list)
     ```
