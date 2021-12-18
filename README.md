@@ -12,6 +12,12 @@
 1. Install package.
 
     ```r
+    # Get all packages necessary for this example
+    pkgs <- c("devtools", "magrittr", "pbapply", "dplyr")
+    missing_pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]
+    if(length(missing_pkgs)) install.packages(missing_pkgs)
+    
+    # Download the clinicaltrialr package and all dependencies
     devtools::install_github("serghiou/clinicaltrialr")
     ```
 
@@ -24,40 +30,31 @@
     results <- ct_read_results("http://www.clinicaltrials.gov/ct2/results?cond=Heart+Failure")
     ```
 
-4. Build a function using this package to get all trials of interest.
+4. Download all records and construct a dataframe.
 
     ```r
-    read_trials <- function(NCT) {
-
-      NCT %>% 
-        clinicaltrialr::ct_read_trial_xml() %>% 
-        clinicaltrialr::ct_read_trial_csv()
-
-    }
-    ```
-
-5. Download all records and construct a dataframe.
-
-    ```r
-    library(pbapply)
-    trials_list <- pbapply::pblapply(results$`NCT Number`, read_trials, cl = 7)
+    # Install and load pbapply to parallelize this step
+    if (!('pbapply' %in% installed.packages()[,"Package"])) install.packages("pbapply")
+    
+    # Extract data from each trial (this is time-consuming)
+    trials_list <- pbapply::pblapply(results$`NCT Number`, ct_read_trial, cl = 7)
     trials <- dplyr::bind_rows(trials_list)
     ```
 
-6. Re-extract values for which the algorithm was not allowed acccess to the website.
+5. Re-extract values for which the algorithm was not allowed acccess to the website.
 
     ```r
-    missing_index <- grep("Error in open", trials_list)
-    missing_nct <- paed$`NCT Number`[missing_index]
-    missing_doc <- pblapply(missing_nct, read_trials, cl = 7)
-    trials_list[missing_index] <- missing_doc
-    trials <- dplyr::bind_rows(trials)
+    missing_idx <- grep("Error in open", trials_list)
+    missing_nct <- results$`NCT Number`[missing_idx]
+    missing_doc <- pbapply::pblapply(missing_nct, read_trials, cl = 7)
+    trials_list[missing_idx] <- missing_doc
+    trials <- dplyr::bind_rows(trials_list)
     ```
 
-7. Save as CSV in a folder called "Output".
+6. Save as CSV in a folder called "output".
 
     ```r
-    write_csv(trials, "../Output/pediatric-trial-records.csv")
+    write_csv(trials, "../output/trial-records.csv")
     ```
 
 
